@@ -1,0 +1,19 @@
+{
+	"servers": {
+		"playwright": {
+			"type": "stdio",
+			"sandboxEnabled": false,
+			"command": "npx",
+			"cwd": "${input:cwd}",
+			"args": [
+				"@playwright/mcp@0.0.68"
+			],
+			"dev": {
+				"enabled": false
+			}
+		}
+	},
+	"inputs": [
+	
+	]
+}

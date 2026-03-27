@@ -2,7 +2,7 @@ import {test,expect} from '@playwright/test';
 import {examplePage} from '../pages/examplePage';
 import {PG_01_CreateAccountPage} from '../pages/PG_01_CreateAccountPage.js'
 
-
+//test
 
 
 // test('@sanity Registration form',async({page})=>{

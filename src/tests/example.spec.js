@@ -36,5 +36,6 @@ await loginpage.login();
 
 await dashboardpage.dashboardValidationCheck();
 await dashboardpage.dashboard();
+await dashboardpage.brightVerify();
 })
 

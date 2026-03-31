@@ -21,7 +21,6 @@ export class PG_04_DashboardPage {
             StartNewApplication: this.page.getByRole('button', { name: 'Start new application' }),
 
             //Validation locators
-
             FirstNameEmpty: this.page.locator('#first-name-group-error').getByText('This is a required field.'),
             FirstNameOnlyLetters: this.page.getByText('The first name can only contain letters, spaces and hyphens (-)'),
             LastNameEmpty: this.page.locator('#last-name-group-error'),
@@ -31,15 +30,15 @@ export class PG_04_DashboardPage {
             PhoneNumberEmpty: this.page.getByText('Phone number is required'),
 
             //Bright Verify
+            BrightVerifyModal: this.page.getByRole('alertdialog'),
+            BrightVerifyClose: this.page.getByRole('button', { name: 'Close' }),
+            BrightVerifyGoBackAndChange: this.page.getByRole('button', { name: 'Go back and change' }),
+            BrightVerifySubmit: this.page.getByRole('button', { name: 'Submit' }),
 
         }
     }
 
-
-
-
     async dashboardValidationCheck() {
-        // Click Start New Application
         await this.selectors.StartNewApplication.click();
 
         // Check for required field validation messages
@@ -97,9 +96,6 @@ export class PG_04_DashboardPage {
         }
     }
 
-
-
-
     async dashboard() {
         // Fill first name and last name with faker
         const firstName = faker.person.firstName();
@@ -112,23 +108,16 @@ export class PG_04_DashboardPage {
         await this.selectors.BirthdayMonth.click();
         await this.page.getByRole('option', { name: 'March' }).click();
 
-                await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(1000);
         await this.selectors.BirthdayDay.click();
         await this.page.getByRole('option', { name: '1' }).nth(0).click();
 
-                await this.page.waitForTimeout(1000);
+        await this.page.waitForTimeout(1000);
         await this.selectors.BirthdayYear.click();
         await this.page.getByRole('option', { name: '2000' }).click();
 
-
-
-
         // Fill phone number
         await this.selectors.PhoneNumber.fill('5008878780');
-                await this.page.waitForTimeout(1000);
-
-
-        // Wait for 500ms
         await this.page.waitForTimeout(500);
 
         // Select 'No' for Is This Mobile Number
@@ -136,6 +125,13 @@ export class PG_04_DashboardPage {
 
         // Click Start New Application button again to submit
         await this.selectors.StartNewApplication.click();
+    }
+
+    async brightVerify() {
+        if (await this.selectors.BrightVerifyModal.isVisible()) {
+            console.log("Bright Verify Modal Appeared")
+            await this.selectors.BrightVerifySubmit.click();
+        }
     }
 
 }

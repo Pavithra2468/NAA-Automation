@@ -30,14 +30,31 @@ export default defineConfig({
   },
 
   /* Configure projects for major browsers */
-  projects: [
-    {
-      name: 'chromium',
-      use: { 
-      ...devices['Desktop Chrome']
-    // ...devices['Galaxy S24'] 
+  // projects: [
+  //   {
+  //     name: 'chromium',
+  //     use: { 
+  //     ...devices['Desktop Chrome'],
+  //   // ...devices['Galaxy S24'] 
+  //   launchOptions: {
+  //         args: ['--start-maximized'], // Add start-maximized argument
+  //       },
+  //       viewport: null
+  //   },
+  //   },
+
+    projects: [
+  {
+    name: 'chromium',
+    use: {
+      headless: false,
+      viewport: null,
+      launchOptions: {
+        args: ['--start-maximized'],
+      }
     },
-    },
+  }
+
 
     // {
     //   name: 'firefox',

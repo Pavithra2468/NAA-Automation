@@ -1,10 +1,6 @@
 {
   "validUser": {
-    "email": "pavi@test.com",
-    "password": "Test@123"
-  },
-  "invalidUser": {
-    "email": "wrong@test.com",
-    "password": "123"
+    "email": "zitahowe1774954175360@test.asu.edu",
+    "password": "Tester@123"
   }
 }

@@ -84,20 +84,39 @@ export class PG_04_MyInformationPage {
             EducationBenefitsNO: this.page.getByLabel('Education benefitsDo you plan').getByRole('radio', { name: 'No', exact: true }),
             SelectYourBenefitprovider: this.page.getByRole('combobox', { name: 'Select your benefit provider' }),
 
-            //Bright Verify
-            BrightVerifyDialog: this.page.getByRole('alertdialog'),
-            BrightverifyClose: this.page.getByRole('button', { name: 'Close' }),
-            BrightverifyGoBackAndChange: this.page.getByRole('button', { name: 'Go back and change' }),
-            BrightverifySubmit: this.page.getByRole('button', { name: 'Submit' })
+            //Validation Locators
+            legalsex: this.page.locator('[data-cy="my-info-legal-sex-group"]').getByText('This is a required field.'),
+            primarylanguage: this.page.locator('#base_select_group_primary_language_select').getByText('This is a required field.'),
+            homeaddress: this.page.locator('#base_select_group_home_country').getByText('This is a required field.'),
+            addressline1: this.page.locator('#group_address_line_1-error').getByText('This is a required field.'),
+            city: this.page.locator('#group_city-error').getByText('This is a required field.'),
+            state: this.page.locator('#base_select_group_state_code .invalid-feedback'),
+            zipcode: this.page.locator('#group_zip_code-error').getByText('This is a required field.'),
+
+            //citizenship
+            uscitizenship: this.page.getByLabel('U.S. citizenshipBegin by').getByText('This is a required field.'),
+
+            //iam us citizen
+            countryofbirth: this.page.locator('#base_select_group_birth_country .invalid-feedback').getByText('This is a required field.'),
+            socialsecuritynumber: this.page.locator('#social_security_number-error').getByText('This is a required field.'),
+            socialsecuritynumberconformation: this.page.locator('[data-cy="my-info-us-citizenship-ssn-group"]').locator('.invalid-feedback'),
+
+            //iam not us citizen
+            choosevisatype: this.page.locator('[data-cy="my-info-us-citizenship-visa-type-group"]').locator('.invalid-feedback'),
+
+            //ASU Affiliate
+            previousasuaffiliation: this.page.locator('#group_asu_affiliation-error').getByText('This is a required field.'),
+            shouldcontain10number: this.page.locator('#group_asu_affiliate_id-error').getByText('Should contain 10 numbers.'),
+            shouldcontainonlynumber: this.page.locator('#group_asu_affiliate_id-error').toHaveText('This should contain only numbers.'),
+
+            usuniformedservice: this.page.locator('#base_select_group_us_uniformed_services').getByText('This is a required field.'),
+            educationbenefits: this.page.locator('[data-cy="my-info-partner-benefits-education-benefit-group"]').locator('.radio-card-error'),
+
         }
     }
 
 
-    async CheckBrightVerify() {
-        if (await this.selectors.BrightVerifyDialog.isVisible()) {
-            await this.selectors.BrightverifySubmit.click();
-        }
-    }
+
 
 
 }

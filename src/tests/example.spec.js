@@ -1,6 +1,6 @@
 import {test,expect} from '@playwright/test';
 import {examplePage} from '../pages/examplePage';
-import {PG_01_CreateAccountPage} from '../pages/PG_01_CreateAccountPage.j
+import {PG_01_CreateAccountPage} from '../pages/PG_01_CreateAccountPage.js'
 import {PG_02_LoginPage} from '../pages/PG_02_LoginPage.js'
 import {PG_04_DashboardPage} from '../pages/PG_04_DashboardPage.js'
 

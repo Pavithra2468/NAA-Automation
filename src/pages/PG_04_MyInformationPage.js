@@ -83,6 +83,14 @@ export class PG_04_MyInformationPage {
             EducationBenefitsYES: this.page.getByLabel('Education benefitsDo you plan').getByRole('radio', { name: 'Yes' }),
             EducationBenefitsNO: this.page.getByLabel('Education benefitsDo you plan').getByRole('radio', { name: 'No', exact: true }),
             SelectYourBenefitprovider: this.page.getByRole('combobox', { name: 'Select your benefit provider' }),
+            HaveYouEarnedBachelorDegreeOrhigherYES: this.page.getByLabel('Have you earned a bachelor’s').getByRole('radio', { name: 'Yes' }),
+            HaveYouEarnedBachelorDegreeOrhigherNO: this.page.getByLabel('Have you earned a bachelor’s').getByRole('radio', { name: 'No' }),
+            StarbucksPartner: this.page.getByRole('radio', { name: 'Starbucks partner' }),
+            EnterYourStarbucksPartnerNumber: this.page.getByRole('textbox', { name: 'Enter your Starbucks partner' }),
+            EnterYourStarbucksPartnerNumberEnter: this.page.locator('[data-cy="my-info-partner-benefits-starbucks-number"] button'),
+            StarbucksAccept: this.page.getByRole('checkbox', { name: 'I accept' }),
+            StarbucksManagerDisclosureAccept: this.page.getByRole('radio', { name: 'Accept' }),
+
 
             //Validation Locators
             legalsex: this.page.locator('[data-cy="my-info-legal-sex-group"]').getByText('This is a required field.'),
@@ -107,7 +115,7 @@ export class PG_04_MyInformationPage {
             //ASU Affiliate
             previousasuaffiliation: this.page.locator('#group_asu_affiliation-error').getByText('This is a required field.'),
             shouldcontain10number: this.page.locator('#group_asu_affiliate_id-error').getByText('Should contain 10 numbers.'),
-            shouldcontainonlynumber: this.page.locator('#group_asu_affiliate_id-error').toHaveText('This should contain only numbers.'),
+            shouldcontainonlynumber: this.page.locator('#group_asu_affiliate_id-error').getByText('This should contain only numbers.'),
 
             usuniformedservice: this.page.locator('#base_select_group_us_uniformed_services').getByText('This is a required field.'),
             educationbenefits: this.page.locator('[data-cy="my-info-partner-benefits-education-benefit-group"]').locator('.radio-card-error'),
@@ -115,6 +123,66 @@ export class PG_04_MyInformationPage {
         }
     }
 
+
+    async legalSexRandom() {
+        await this.page.waitForTimeout(500);
+        const options = [
+            this.selectors.LegalSexMale,
+            this.selectors.LegalSexFemale,
+            this.selectors.LegalSexXorAnotherLegalSex
+        ];
+        const randomIndex = Math.floor(Math.random() * options.length);
+        await options[randomIndex].click();
+    }
+
+    async PrimaryLanguageSpokenAtHome() {
+        await this.selectors.PrimaryLanguage.click();
+        await this.page.waitForTimeout(500);
+        await this.page.getByRole('option', { name: 'English' }).nth(0).click();
+    }
+
+    async HomeAddressUnitedStates() {
+        await this.selectors.HomeAddress.click();
+        await this.page.waitForTimeout(500);
+        await this.page.getByRole('option', { name: 'United States' }).nth(0).click();
+        await this.page.waitForTimeout(500);
+
+        // Check if address fields are displayed
+        const addressFields = [
+            { name: 'AddressLine1', locator: this.selectors.AddressLine1 },
+            { name: 'AddressLine2', locator: this.selectors.AddressLine2 },
+            { name: 'City', locator: this.selectors.City },
+            { name: 'StateProvinceRegion', locator: this.selectors.StateProvinceRegion },
+            { name: 'ZipPostalCode', locator: this.selectors.ZipPostalCode }
+        ];
+
+        for (const field of addressFields) {
+            const isVisible = await field.locator.isVisible();
+            if (isVisible) {
+                console.log(`${field.name} is displayed`);
+            } else {
+                console.log(`${field.name} is not displayed`);
+            }
+        }
+
+        // Fill address details
+        await this.selectors.AddressLine1.fill('Test');
+        await this.selectors.City.fill('Test');
+        await this.selectors.StateProvinceRegion.click();
+        await this.page.waitForTimeout(500);
+        await this.page.getByRole('option', { name: 'Arizona' }).nth(0).click();
+        await this.selectors.ZipPostalCode.fill('12345');
+    }
+
+
+    async IamAUScitizen() {
+        await this.selectors.IamUSCitizen.click();
+        await this.page.waitForTimeout(500);
+        await this.selectors.CountryRegionTerritoryOfBirth.click();
+        await this.page.getByRole('option', { name: 'United States' }).nth(0).click();
+        await this.selectors.SocialSecurityNumber.fill('111111111');
+        await this.selectors.ConfirmYourSocialSecurityNumber.fill('111111111');
+    }
 
 
 

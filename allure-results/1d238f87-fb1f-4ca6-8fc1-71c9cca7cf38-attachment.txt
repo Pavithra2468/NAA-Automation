@@ -1,0 +1,6 @@
+Random Starbucks Data: { partnerId: 1696900, firstname: 'Monica', lastname: 'Barboza' }
+AddressLine1 is displayed
+AddressLine2 is displayed
+City is displayed
+StateProvinceRegion is displayed
+ZipPostalCode is displayed

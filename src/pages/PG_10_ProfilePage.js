@@ -12,6 +12,7 @@ export class PG_10_ProfilePage{
             FirstName : this.page.getByRole('textbox', { name: 'First name' }),
             LastName : this.page.getByRole('textbox', { name: 'Last name' }),
             Save : this.page.getByRole('button', { name: 'Save' }),
+            ReturnToDashboard : this.page.getByRole('link', { name: 'Return to dashboard' }),
         }
     }
 }

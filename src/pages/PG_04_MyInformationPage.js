@@ -125,7 +125,7 @@ export class PG_04_MyInformationPage {
 
 
     async legalSexRandom() {
-        await this.page.waitForTimeout(500);
+        await this.page.waitForTimeout(1000);
         const options = [
             this.selectors.LegalSexMale,
             this.selectors.LegalSexFemale,
@@ -137,15 +137,15 @@ export class PG_04_MyInformationPage {
 
     async PrimaryLanguageSpokenAtHome() {
         await this.selectors.PrimaryLanguage.click();
-        await this.page.waitForTimeout(500);
+        await this.page.waitForTimeout(1000);
         await this.page.getByRole('option', { name: 'English' }).nth(0).click();
     }
 
     async HomeAddressUnitedStates() {
         await this.selectors.HomeAddress.click();
-        await this.page.waitForTimeout(500);
+        await this.page.waitForTimeout(1000);
         await this.page.getByRole('option', { name: 'United States' }).nth(0).click();
-        await this.page.waitForTimeout(500);
+        await this.page.waitForTimeout(2000);
 
         // Check if address fields are displayed
         const addressFields = [
@@ -169,7 +169,7 @@ export class PG_04_MyInformationPage {
         await this.selectors.AddressLine1.fill('Test');
         await this.selectors.City.fill('Test');
         await this.selectors.StateProvinceRegion.click();
-        await this.page.waitForTimeout(500);
+        await this.page.waitForTimeout(1000);
         await this.page.getByRole('option', { name: 'Arizona' }).nth(0).click();
         await this.selectors.ZipPostalCode.fill('12345');
     }
@@ -177,14 +177,15 @@ export class PG_04_MyInformationPage {
 
     async IamAUScitizen() {
         await this.selectors.IamUSCitizen.click();
-        await this.page.waitForTimeout(500);
+        await this.page.waitForTimeout(1000);
         await this.selectors.CountryRegionTerritoryOfBirth.click();
         await this.page.getByRole('option', { name: 'United States' }).nth(0).click();
-        await this.selectors.SocialSecurityNumber.fill('111111111');
-        await this.selectors.ConfirmYourSocialSecurityNumber.fill('111111111');
+        await this.page.waitForTimeout(2000);
+        const ssn = String(Math.floor(100000000 + Math.random() * 900000000));
+        await this.selectors.SocialSecurityNumber.click();
+        await this.selectors.SocialSecurityNumber.fill(ssn);
+        await this.page.waitForTimeout(1000);
+        await this.selectors.ConfirmYourSocialSecurityNumber.click();
+        await this.selectors.ConfirmYourSocialSecurityNumber.fill(ssn);
     }
-
-
-
-
 }

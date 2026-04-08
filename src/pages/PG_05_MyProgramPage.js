@@ -1,4 +1,4 @@
-export class program {
+export class PG_05_MyProgramPage {
     constructor(page) {
         this.page = page;
         this.selectors = {
@@ -35,6 +35,14 @@ export class program {
         for (let i = 0; i < count; i++) {
             await this.selectors.chooseprogram.nth(i).click();
             await this.selectors.step1of2.waitFor({ state: 'visible' });
+            const dropdown = await this.page.getByRole('button', { name: 'Select a location Toggle' });
+            if (await dropdown.count() > 0) {
+                await dropdown.click();
+                await this.page.getByRole('option', { name: 'West Valley' }).click();
+                console.log('Location selected');
+            } else {
+                console.log('Dropdown not present, skipping selection');
+            }
             await this.selectyear();
         }
     }
@@ -74,6 +82,11 @@ export class program {
             await this.selectors.step1of2.isVisible();
             await this.selectyear();
         }
+    }
+
+
+    async starbucksChooseProgram() {
+
     }
 
 }
